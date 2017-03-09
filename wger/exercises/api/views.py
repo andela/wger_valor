@@ -176,7 +176,7 @@ class ExerciseImageViewSet(viewsets.ModelViewSet):
                      'license',
                      'license_author')
 
-    @detail_route(methods=['GET'])
+    @detail_route()
     def thumbnails(self, request, pk):
         '''
         Return a list of the image's thumbnails
