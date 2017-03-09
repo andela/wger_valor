@@ -29,6 +29,7 @@ from wger.config.models import LanguageConfig
 from wger.exercises.api.serializers import (
     MuscleSerializer,
     ExerciseSerializer,
+    ExerciseInfoSerializer,
     ExerciseImageSerializer,
     ExerciseCategorySerializer,
     EquipmentSerializer,
@@ -61,8 +62,6 @@ class ExerciseViewSet(viewsets.ModelViewSet):
                      'muscles',
                      'muscles_secondary',
                      'status',
-                     'name',
-                     'equipment',
                      'license',
                      'license_author')
 
@@ -76,7 +75,23 @@ class ExerciseViewSet(viewsets.ModelViewSet):
         obj.set_author(self.request)
         obj.save()
 
-
+class ExerciseInfoViewSet(viewsets.ModelViewSet):
+    '''
+    API endpoint for exercise objects
+    '''
+    queryset = Exercise.objects.all()
+    serializer_class = ExerciseInfoSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly, CreateOnlyPermission)
+    ordering_fields = '__all__'
+    filter_fields = ('category',
+                     'creation_date',
+                     'description',
+                     'language',
+                     'muscles',
+                     'muscles_secondary',
+                     'status',
+                     'license',
+                     'license_author')
 @api_view(['GET'])
 def search(request):
     '''
@@ -157,7 +172,7 @@ class ExerciseImageViewSet(viewsets.ModelViewSet):
                      'license',
                      'license_author')
 
-    @detail_route()
+    @detail_route(methods=['GET'])
     def thumbnails(self, request, pk):
         '''
         Return a list of the image's thumbnails
@@ -205,5 +220,4 @@ class MuscleViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Muscle.objects.all()
     serializer_class = MuscleSerializer
     ordering_fields = '__all__'
-    filter_fields = ('name',
-                     'is_front')
+    filter_fields = ('name',)
