@@ -62,6 +62,8 @@ class ExerciseViewSet(viewsets.ModelViewSet):
                      'muscles',
                      'muscles_secondary',
                      'status',
+                     'name',
+                     'equipment',
                      'license',
                      'license_author')
 
@@ -90,6 +92,8 @@ class ExerciseInfoViewSet(viewsets.ModelViewSet):
                      'muscles',
                      'muscles_secondary',
                      'status',
+                     'name',
+                     'equipment',
                      'license',
                      'license_author')
 @api_view(['GET'])
