@@ -20,6 +20,7 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route
 
+
 from wger.core.models import (
     UserProfile,
     Language,
@@ -35,8 +36,12 @@ from wger.core.api.serializers import (
     RepetitionUnitSerializer,
     WeightUnitSerializer
 )
-from wger.core.api.serializers import UserprofileSerializer
+from wger.core.api.serializers import UserprofileSerializer, UserSerializer
 from wger.utils.permissions import UpdateOnlyPermission, WgerPermission
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    serializer_class = UserSerializer
 
 
 class UserProfileViewSet(viewsets.ModelViewSet):
