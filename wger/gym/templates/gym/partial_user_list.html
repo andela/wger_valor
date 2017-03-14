@@ -48,6 +48,16 @@ $(document).ready( function () {
         {% endif %}
     </td>
     {% endif %}
+    
+    {% if current_user.obj.is_active %}
+    <td>
+        Active
+    </td>
+    {% else %}
+    <td>
+        Inactive
+    </td>
+    {% endif %}
 </tr>
 {% endfor %}
 </tbody>
