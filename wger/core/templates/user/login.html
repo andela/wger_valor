@@ -5,6 +5,7 @@
 
 
 {% block header %}
+<link rel="stylesheet" type="text/css" href="../../static/css/bootstrap-social.css">
 {% endblock %}
 
 {% block content %}
@@ -35,7 +36,7 @@
 </p>
 
 <p>
-    <a href="{% url 'social:begin' 'twitter' %}" class="btn btn-block btn-social btn-twitter">
+    <a href="{% url 'social:begin' 'twitter' %}" class="btn btn-block btn-social btn-twitter" style="text-align: center">
         <span class="fa fa-twitter"></span> {% trans "Sign in with Twitter" %}
     </a>
 </p>
