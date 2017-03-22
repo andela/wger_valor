@@ -1,0 +1,222 @@
+body {
+	background-color:#1d1d1d;
+}
+
+p.small {
+    font-size: 16px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+}
+
+.img-centered {
+    margin: 0 auto;
+}
+
+section {
+    padding: 100px 0;
+	background-color: #f2f2f2;
+}
+
+section h2 {
+    margin: 0;
+    font-size: 3em;
+}
+
+section.success {
+    color: #204a87;
+    background: #fff;
+	max-height: 500px;
+}
+
+@media(max-width:767px) {
+    section {
+        padding: 75px 0;
+    }
+
+    section.first {
+        padding-top: 75px;
+    }
+}
+
+@keyframes BackgroundAnimation {
+	0% {
+		opacity: 1;
+	}
+
+	50%{
+		opacity: 0.4
+	}	
+
+	100%{
+		opacity: 1;
+
+	}
+}
+
+header.home{
+	background-image:url(../img/TemplateImg/homebackground.jpg);
+	background-size: cover;
+	background-position: 50% 50%;
+	background-attachment: fixed !important;
+	background-repeat: repeat;
+	-webkit-animation: BackgroundAnimation 3s linear infinite;
+	-moz-animation: BackgroundAnimation 3s linear infinite;
+	-ms-animation: BackgroundAnimation 3s linear infinite;
+	animation: BackgroundAnimation 3s linear infinite;
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 456px;
+	background-position: 50% 0px;
+}
+
+header.bottom{
+	background-image:url(../img/TemplateImg/page2.png);
+	background-size: cover;
+	background-position: 50% 50%;
+	background-attachment: fixed !important;
+	background-repeat: repeat;
+	-webkit-animation: BackgroundAnimation 3s linear infinite;
+	-moz-animation: BackgroundAnimation 3s linear infinite;
+	-ms-animation: BackgroundAnimation 3s linear infinite;
+	animation: BackgroundAnimation 3s linear infinite;
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 800px;
+	background-position: 50% 0px;
+}
+
+header.home .img-responsive{
+    width: 120px;
+    border: solid #fff;
+	border-radius: 50%;
+}
+.heading .white{color:#fff;}
+.heading .darkblue{color:#0b235b}
+.heading .grey{color:#a3a5a9;}
+
+.testimonial.testimonial-version2 .item .textbox:after {
+	border-right: 0 solid transparent;
+	border-left: 22px solid transparent;
+	border-top: 22px solid #fafafa;
+	
+}
+
+.testimonial.testimonial-version2 .item .textbox:after, .testimonial.testimonial-version2 .item .textbox:before {
+
+	left: 10px;
+
+}
+.testimonial.testimonial-version2 .testimonial-control{
+	top: -45px;
+}
+.testimonial .item .textbox {
+	font-style: italic;
+	position: relative;
+	padding: 20px;
+	border-radius:25px;
+	background: #3fbfE1;
+	
+}
+.testimonial .testimonial-control { 
+	background-image: none;
+  	top: -65px;
+	position: relative;
+
+
+}
+.testimonial .testimonial-metadata img {
+	width: 80px;
+	height: 80px;
+	padding: 2px;
+	margin-right: 15px;
+	float: left;
+	border-radius: 50%;
+}
+.testimonial .testimonial-metadata .author{ 
+	top: 3px;
+	font-size:16px;
+	position: relative;
+	font-weight:bold;
+	color:#006f8a;
+}
+
+.testimonial-control .btn{
+	padding: 0px 6px;
+	font-size:11px;
+}
+.testimonial .item .textbox:after, .testimonial .item .textbox:before {
+width: 0;
+height: 0;
+left: 80px;
+content: " ";
+bottom: -20px;
+display: block;
+position: absolute;
+}
+.testimonial.testimonial-version1 .item .textbox:after {
+border-left: 0 solid transparent;
+border-right: 22px solid transparent;
+border-top: 22px solid #3fbfE1;
+}
+.testimonial .item .textbox{margin-bottom:10px;width:100%;}
+.testimonial-version1{margin-top:30px;}
+
+.services{	
+	background-color: #fff;
+	color:#204a87;
+}
+
+.animateup,.animateright,.animateleft{
+  -vendor-animation-duration: 4s;
+  -vendor-animation-delay: 0s;
+  -vendor-animation-iteration-count: infinite;
+  -webkit-transition: all ease .5s;
+    -moz-transition: all ease .5s;
+    transition: all ease .5s;
+}
+
+.slides{
+	list-style:none; 
+	width:100%;
+	max-width:100%;
+	height:100%;
+	padding:0px;
+}
+.slides li{
+	text-align:center;
+}
+
+div#content {
+    display: none;
+    }
+
+div#loading {             
+    top: 0;
+    left: 0;
+    margin-left:0;
+    margin-top:0;
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background: url(../img/TemplateImg/loader.gif) no-repeat;
+    background-color: rgb(9,34,85);
+    border-width: 0px;
+    border-bottom-width:0px;
+    border-right-color: #092255;
+    border-right-style: none;
+    border-bottom-color:#092255;
+    border-bottom-style: none;
+    border: none;     
+    }

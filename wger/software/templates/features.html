@@ -18,221 +18,205 @@
 {# Content #}
 {#         #}
 {% block content %}
-    <header>
+
+<head>
+    <script type="text/javascript">
+        function preloader(){
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("content").style.display = "block";
+        }//preloader
+        function myFunction(){
+            myVar = setTimeout(preloader, 2000);
+        }
+        window.onload = preloader;
+	</script>
+    <!-- Bootstrap Core CSS -->
+    <!--<link href="../../static/css/bootstrap.css" rel="stylesheet" type="text/css">-->
+	<link href="../../static/css/animate.css" rel="stylesheet" type="text/css">
+    <link href="../../static/css/style.css" rel="stylesheet" type="text/css">
+
+    <!-- Fonts -->
+    <link href="../../static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+
+    <!-- IE8 support for HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top" class="list_blog" data-spy="scroll" data-target=".navbar-fixed-top" onload="myFunction()">
+<div id="loading"></div>
+<div id="main">
+<div id="content">
+
+    <header class="home">
         <div class="container">
-            <div class="intro-text">
-                <div class="intro-heading">{% trans "Welcome to wger" %}</div>
-                <div class="intro-lead-in">{% trans "Your body." %}</div>
-                <div class="intro-lead-in">{% trans "Your workouts." %}</div>
-                <div class="intro-lead-in">{% trans "Your data." %}</div>
-                <div class="intro-lead-in">{% trans "Your progress." %}</div>
-                {% if allow_guest_users and not user.is_authenticated %}
-                    <a href="{% url 'core:user:demo-entries' %}" class="page-scroll btn btn-xl" rel="nofollow" style="margin-top: 1em;">
-                        {% trans "Try it now" %}
-                    </a>
-                {% endif %}
-
-                {% if not user.is_authenticated or user.userprofile.is_temporary %}
-                    {% if allow_registration %}
-                        <a href="{% url 'core:user:registration' %}" class="page-scroll btn btn-xl" style="margin-top: 1em;">
-                            {% trans "Register" %}
-                        </a>
-                    {% endif %}
-
-                    <a href="{% url 'core:user:login' %}" class="page-scroll btn btn-xl" style="margin-top: 1em;">
-                        {% trans "Login" %}
-                    </a>
-                {% endif %}
-            </div>
         </div>
     </header>
-
-    <!-- Services Section -->
-    <section id="services" class="bg-darkest-gray">
+	
+	<section class="success" id="about">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading text-light">{% trans "Your advantages" %}</h2>
-                    <h3 class="section-subheading text-muted">
-                        {% blocktrans trimmed %}
-                            wger Workout Manager is a free, open source web application that manages
-                            your exercises, workouts and nutrition. It started as a pet project of
-                            mine to replace my growing collection of different spreadsheets, but it
-                            has become something other people could also find useful.
-                        {% endblocktrans %}
-                    </h3>
+                <div class="col-lg-12 text-center animateup">
+                    <h2>Features</h2>
+                    <br>
                 </div>
             </div>
-            <div class="row text-center">
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-user fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading text-light">{% trans "Workouts" %}</h4>
-                    <p class="text-muted">
-                        {% blocktrans trimmed %}
-                            You can create and manage flexible workout routines for any goals you
-                            have. Select exactly which exercises you'll do and how many repetitions,
-                            time or distance you want to do them. You can also combine different
-                            workouts into a schedule.
-                        {% endblocktrans %}
+			<div class="gap-30"></div>
+            <div class="row">
+                <div class="col-md-7">
+					<h1 class="heading animateleft">
+						<span class="darkblue">Why</span><br>
+						<span class="grey">choose wger</span>
+					</h1>
+                    <p class="white animateleft">
+
+                    <span class="grey">Weight Tracker: </span>
+                    Keep track of your progress with the body weight chart. This makes it easy to see if you are reaching your goals or need to adjust something.
+                    </p>
+
+                    <p class="white animateleft">
+                    
+                    <span class="grey">Calendar: </span>
+                    Get an overview of how and when you trained as well as how you personally felt you performed. Access all your individual diary entries with one click.
+                    </p>
+                    
+                    <p class="white animateleft">
+                    <span class="grey">Exercise Database: </span>
+                    The exercise database contains more than hundred exercises from which you can choose when creating a workout. You can view them by category and equipment used or muscles trained.                    
+                    </p>
+
+                    <p class="white animateleft">
+                    <span class="grey">Gym Management: </span>
+                    Use the application for your gym to manage its members, their workouts and attendance. You can manage the members' contracts, keep notes and upload any files you might need.
+                    </p>
+                    
+                    <p class="white animateleft">
+                    <span class="grey">REST API: </span>
+                    wger provides a REST API with full read and write access to all data so you can integrate your own application and tools.
                     </p>
                 </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-cutlery fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading text-light">{% trans "Nutrition" %}</h4>
-                    <p class="text-muted">
-                        {% blocktrans trimmed %}
-                            Create your personal diet plan by creating as many meals with as many
-                            different ingredients as you need. The application will calculate the
-                            nutritional values (total energy, protein, carbohydrates, and so on)
-                            about the whole plan as well as the indivual meals.
-                        {% endblocktrans %}
-                    </p>
-                </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-line-chart fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading text-light">{% trans 'Diary' %}</h4>
-                    <p class="text-muted">
-                        {% blocktrans trimmed %}
-                            Enter the weights and repetitions you did for each exercise to generate
-                            diagrams that let you see at a glance how well you are doing. The raw
-                            numbers are of course still accessible.
-                        {% endblocktrans %}
-                        {% trans "You can also enter notes and a general impression (great, neutral, etc.)" %}
-                    </p>
-                </div>
+                <div class="col-md-5">
+					<div id="testimonials-2" class="slide testimonial testimonial-version1 animateright">
+							<div class="carousel-inner">
+								<div class="item active">
+
+									<div class="fullwidth">
+										<div class="testimonial-metadata">
+											<span class="author primary-color">
+											</span>
+											<br>
+										</div>
+                                        <img src="../../static/img/templateimg/ft1.png"/>
+									</div>
+								</div>
+								<div class="item">
+
+									<div class="fullwidth">
+										<div class="testimonial-metadata">
+											<span class="author primary-color">
+											</span>
+											<br>
+										</div>
+                                        <img src="../../static/img/templateimg/ft3.png"/>
+
+									</div>
+								</div>
+								<div class="item">
+
+									<div class="fullwidth">
+										<div class="testimonial-metadata">
+											<span class="author primary-color">
+											</span>
+											<br>
+										</div>
+                                        <img src="../../static/img/templateimg/ft4.png"/>
+                                        
+									</div>
+								</div>
+
+								<div class="item">
+	
+									<div class="fullwidth">
+										<div class="testimonial-metadata">
+											<span class="author primary-color">
+											</span>
+											<br>
+										</div>
+                                        <img src="../../static/img/templateimg/ft5.png"/>
+                                        
+									</div>
+								</div>
+
+
+								<div class="item">
+		
+									<div class="fullwidth">
+										<div class="testimonial-metadata">
+											<span class="author primary-color">
+											</span>
+											<br>
+										</div>
+                                        <img src="../../static/img/templateimg/ft6.png"/>
+                                        
+									</div>
+								</div>
+
+							</div>
+						<div class="testimonial-control pull-right">
+							<a class="left  btn btn-primary btn-xs" href="#testimonials-2" data-slide="prev"><i class="fa fa-angle-left fa-2x"></i></a>
+							<a class="right btn btn-primary btn-xs" href="#testimonials-2" data-slide="next"><i class="fa fa-angle-right fa-2x"></i></a>
+						</div>
+					</div>
+				</div>	
             </div>
         </div>
     </section>
 
-    <section id="about" class="bg-light-gray">
+    <section class="services" id="services">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">{% trans "Features" %}</h2>
-                    <h3 class="section-subheading text-muted">{% trans "Among many others" %}</h3>
+                <br><br>
+                <div class="col-lg-12 text-center animateup">
+                        {% if allow_guest_users and not user.is_authenticated %}
+                            <a href="{% url 'core:user:demo-entries' %}" class="page-scroll btn btn-xl" rel="nofollow" style="margin-top: 1em;">
+                                {% trans "Try it now" %}
+                            </a>
+                        {% endif %}
+
+                        {% if not user.is_authenticated or user.userprofile.is_temporary %}
+                            {% if allow_registration %}
+                                <a href="{% url 'core:user:registration' %}" class="page-scroll btn btn-xl" style="margin-top: 1em;">
+                                    {% trans "Register" %}
+                                </a>
+                            {% endif %}
+
+                            <a href="{% url 'core:user:login' %}" class="page-scroll btn btn-xl" style="margin-top: 1em;">
+                                {% trans "Login" %}
+                            </a>
+                        {% endif %}                    
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <ul class="timeline">
-                        <li>
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="{% static 'images/weight-chart.png' %}" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>{% trans "Weight tracker" %}</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">
-                                        {% blocktrans trimmed %}
-                                            Keep track of your progress with the body weight chart. This makes
-                                            it easy to see if you are reaching your goals or need to adjust
-                                            something.
-                                        {% endblocktrans %}
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="{% static 'images/calendar.png' %}" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>{% trans 'Calendar' %}</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">
-                                        {% blocktrans trimmed %}
-                                            Get an overview of how and when you trained as well as how you
-                                            personally felt you performed. Access all your individual diary
-                                            entries with one click.
-                                        {% endblocktrans %}
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline">
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="{% static 'images/muscle-overview.png' %}" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>{% trans 'Exercise database' %}</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">
-                                        {% blocktrans trimmed %}
-                                            The exercise database contains more than hundred exercises from
-                                            which you can choose when creating a workout. You can view them by
-                                            category and equipment used or muscles trained.
-                                        {% endblocktrans %}
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="{% static 'images/gym-management.png' %}" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>{% trans 'Gym management' %}</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">
-                                        {% blocktrans trimmed %}
-                                            Use the application for your gym to manage its members, their
-                                            workouts and attendance. You can manage the members' contracts,
-                                            keep notes and upload any files you might need.
-                                        {% endblocktrans %}
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline">
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="{% static 'images/rest-api.png' %}" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>{% trans "REST API" %}</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">
-                                        {% blocktrans trimmed %}
-                                            wger provides a REST API with full read and write access to all
-                                            data so you can integrate your own application and tools.
-                                        {% endblocktrans %}
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline">
-                            <div class="timeline-image">
-                                <h4>{% blocktrans trimmed %}100% Free
-                                    <br>and
-                                    <br>Open Source{% endblocktrans %}
-                                </h4>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+			</div>
+		</div>        
+	</section>
 
+	<header class="bottom">
+    </header>
 
-
+    <script src="../../static/js/jquery-1.10.2.js"></script>
+    <script src="../../static/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="../../static/js/classie.js"></script>
+    <script src="../../static/js/cbpAnimatedHeader.js"></script>
+    <script src="../../static/js/jquery.appear.js"></script>
+	<script src="../../static/js/businessplus.js"></script>
+	<script src="../../static/js/jquery.flexslider-min.js"></script>
+	<script src="../../static/js/jquery.isotope.min.js"></script>
+	
+    </script>
 
 {% endblock %}
+
