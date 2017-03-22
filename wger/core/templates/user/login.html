@@ -13,6 +13,7 @@
       class="form-horizontal">
     {% trans 'Login' as submit_text %}
     {% render_form_fields form submit_text %}
+    <a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a>
 </form>
 {% endblock %}
 
