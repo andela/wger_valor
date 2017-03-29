@@ -40,8 +40,6 @@ from django.views.generic import (
 from django.conf import settings
 from rest_framework.authtoken.models import Token
 
-from social_django.models import UserSocialAuth
-
 from wger.utils.constants import USER_TAB
 from wger.utils.generic_views import WgerFormMixin, WgerMultiplePermissionRequiredMixin
 from wger.utils.user_agents import check_request_amazon, check_request_android
@@ -308,40 +306,6 @@ def preferences(request):
         return HttpResponseRedirect(reverse('core:user:preferences'))
     else:
         return render(request, 'user/preferences.html', template_data)
-
-
-@login_required
-def manage_connected(request):
-    '''
-    Manages connecting or disconnecting to social accounts
-    '''
-    user = request.user
-
-    try:
-        google_login = user.social_auth.get(provider='google')
-    except UserSocialAuth.DoesNotExist:
-        google_login = None
-
-    try:
-        twitter_login = user.social_auth.get(provider='twitter')
-    except UserSocialAuth.DoesNotExist:
-        twitter_login = None
-
-    try:
-        facebook_login = user.social_auth.get(provider='facebook')
-    except UserSocialAuth.DoesNotExist:
-        facebook_login = None
-
-    can_disconnect = (user.social_auth.count() > 1 or user.has_usable_password())
-    # can_disconnect = (user.social_auth.count() > 1)
-
-    return render(request, 'user/manage_connected.html', {
-        'google_login': google_login,
-        'twitter_login': twitter_login,
-        'facebook_login': facebook_login,
-        'can_disconnect': can_disconnect
-    })
-
 
 
 class UserDeactivateView(LoginRequiredMixin,
