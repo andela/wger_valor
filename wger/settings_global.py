@@ -138,8 +138,9 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'wger.utils.helpers.EmailAuthBackend',
 
-    'social_core.backends.twitter.TwitterOAuth',
-    'social_core.backends.facebook.FacebookOAuth2'
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.twitter.TwitterOAuth'
 )
 
 TEMPLATES = [
@@ -163,7 +164,7 @@ TEMPLATES = [
                 'django_mobile.context_processors.flavour',
 
                 # Django social
-                'social_django.context_processors.backends', 
+                'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
 
                 # Breadcrumbs
@@ -207,7 +208,7 @@ EMAIL_SUBJECT_PREFIX = '[wger] '
 #
 LOGIN_URL = '/user/login'
 LOGIN_REDIRECT_URL = '/'
-
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
 
 #
 # Internationalization
@@ -358,10 +359,33 @@ REST_FRAMEWORK = {
 
 
 #
+# Facebook SocialAuth Configs
+#
+SOCIAL_AUTH_FACEBOOK_KEY = '1375753745801416'
+SOCIAL_AUTH_FACEBOOK_SECRET = '40c07873a65a205fe51c98ea77c7422f'
+
+
+#
+# Google SocialAuth Configs
+#
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '123971154851-gbpfgfrs7biu68o6o1rd5b227vgrqgs9.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '1rR7GePsisKA5EU4a5IMmZQG'
+GOOGLE_WHITE_LISTED_DOMAINS = ['localhost:8000']
+
+
+#
 # Twitter SocialAuth Configs
 #
 SOCIAL_AUTH_TWITTER_KEY = '4J6Jg76hWA2NAzx3uoIHjIjjS'
 SOCIAL_AUTH_TWITTER_SECRET = 'kBFRetfDXXKnBeNIqrRLnJR9b1c9s6Q0JrKStdXN3ndx5qJ52G'
+
+
+#
+# SocialAuth Raise Configs
+#
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
+# SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/settings/'
+SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 
 
 #

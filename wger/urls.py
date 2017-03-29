@@ -42,6 +42,8 @@ from wger.exercises.api import views as exercises_api_views
 from wger.nutrition.api import views as nutrition_api_views
 from wger.weight.api import views as weight_api_views
 
+from wger.core.views import user
+
 #
 # REST API
 #
@@ -173,6 +175,9 @@ urlpatterns += [
     # SocialAuth
     url(r'^oauth/', include('social_django.urls',
                             namespace='social')),
+
+    # Manage Connected Accounts
+    url(r'^manage_connected/', user.manage_connected, name='manage_connected'),
 ]
 
 #
