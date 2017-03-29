@@ -41,6 +41,26 @@ $(function() {
             </div>
         </div>
 
+          <div class="panel-group" id="Sync from Fitbit">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#preferences-accordion" href="#collapseFitbit">
+                {% trans "Sync from Fitbit" %}
+                </a>
+            </h4>
+            </div>
+            <div id="collapseFitbit" class="panel-collapse collapse">
+            <div class="panel-body">
+                {% render_form_field form.sync_weight %}
+                {% render_form_field form.sync_exercises %}
+                {% render_form_field form.sync_nutrition %}
+                <a href="{{url}}" class="btn btn-default pull-right">{% trans "Sync FitBit" %}</a>
+            </div>
+            </div>
+        </div>
+
 
         <div class="panel panel-default">
             <div class="panel-heading">

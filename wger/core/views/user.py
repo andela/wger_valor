@@ -8,7 +8,8 @@
 # (at your option) any later version.
 #
 # wger Workout Manager is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# but WITHOUT ANY WARRANTY; without even the implied warranty of /;poiu1        1
+
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
@@ -20,6 +21,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.template.context_processors import csrf
 from django.core.urlresolvers import reverse
+from django.db import IntegrityError
 from django.utils.translation import ugettext as _, ugettext_lazy
 from django.utils import translation
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
@@ -63,6 +65,11 @@ from wger.gym.models import (
     GymUserConfig,
     Contract
 )
+import fitbit
+import base64
+import requests
+import urllib
+
 
 logger = logging.getLogger(__name__)
 
@@ -262,6 +269,50 @@ def registration(request):
 
     return render(request, 'form.html', template_data)
 
+@login_required
+def integrate_fitbit(request):
+    if settings.FITAPP_CONSUMER_KEY and settings.FITAPP_CONSUMER_SECRET  is None:
+         messages.info(request, _('Error! Cannot access fitbit. Please provide a client_id and client_secret.'))
+
+    consumer_key = settings.FITAPP_CONSUMER_KEY
+    consumer_secret = settings.FITAPP_CONSUMER_SECRET
+    call_back = settings.SITE_URL + reverse('core:user:fitbit')
+
+    client = fitbit.FitbitOauth2Client(consumer_key, consumer_secret)
+    # allow access to user fitbit account
+    url = client.authorize_token_url(redirect_uri=call_back)
+    template_data = {'url':  url[0]}
+
+    email_form = UserPersonalInformationForm(instance=request.user)
+    form = UserPreferencesForm(instance=request.user)
+
+    template_data['form'] = form
+    template_data['email_form'] = email_form
+    
+    if 'code'in request.GET:
+        code = request.GET.get('code', '')
+        token = client.fetch_access_token(code, call_back)
+        if 'access_token' in token:
+            authd_client = fitbit.Fitbit(client_id=consumer_key,client_secret=consumer_secret,
+                             access_token=token['access_token'], refresh_token=token['refresh_token'])
+
+            user_profile = authd_client.user_profile_get()
+            weight = user_profile["user"]["weight"]
+            date = authd_client.get_bodyweight(period="30d")
+            
+            try:
+                fetched_data = WeightEntry()
+                fetched_data.weight = weight
+                fetched_data.date = date['weight'][0]['date']
+                fetched_data.user = request.user
+                fetched_data.save()
+                messages.info(request, _('Weight has been synced successfully.'))
+            except IntegrityError:
+                messages.error(request, _('Error! Cannot Sync your data from Fitbit because the date exists.'))
+
+
+    
+    return render(request, 'user/preferences.html', template_data)
 
 @login_required
 def preferences(request):
@@ -283,7 +334,7 @@ def preferences(request):
             form.save()
             redirect = True
     else:
-        form = UserPreferencesForm(instance=request.user.userprofile)
+        form = UserPreferencesForm(instance=request.user)
 
     # Process the email form
     if request.method == 'POST':

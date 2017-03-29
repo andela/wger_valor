@@ -37,6 +37,8 @@ htmlcov/
 .tox/
 .coverage
 .cache
+.env
+.DS_Store
 nosetests.xml
 coverage.xml
 

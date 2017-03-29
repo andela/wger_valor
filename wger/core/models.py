@@ -33,6 +33,18 @@ from wger.utils.units import AbstractWeight
 from wger.weight.models import WeightEntry
 
 
+
+# @python_2_unicode_compatible
+# class Fitbit(models.Model):
+
+#     sync_weight = models.BooleanField(default=False,
+#                                        editable=False)
+
+#     sync_exercises = models.BooleanField(default=False,
+#                                        editable=False)
+    
+#     sync_nutrition = models.BooleanField(default=False,
+#                                        editable=False)
 @python_2_unicode_compatible
 class Language(models.Model):
     '''
@@ -109,6 +121,7 @@ class UserProfile(models.Model):
     The user
     '''
 
+
     gym = models.ForeignKey(Gym,
                             editable=False,
                             null=True,
@@ -126,6 +139,12 @@ class UserProfile(models.Model):
     #
     # User preferences
     #
+
+    sync_weight = models.BooleanField(verbose_name=_('sync_exercises'),default=False)
+                                           
+    sync_exercises = models.BooleanField(verbose_name=_('sync_weight'),default=False)
+    
+    sync_nutrition = models.BooleanField(verbose_name=_('sync_nutrition'),default=False)
 
     show_comments = models.BooleanField(verbose_name=_('Show exercise comments'),
                                         help_text=_('Check to show exercise comments on the '

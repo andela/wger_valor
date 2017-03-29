@@ -30,6 +30,7 @@ from django.utils.translation import ugettext as _
 from wger.core.models import UserProfile
 
 
+
 class UserLoginForm(AuthenticationForm):
     '''
     Form for logins
@@ -52,7 +53,18 @@ class UserPreferencesForm(forms.ModelForm):
                   'timer_active',
                   'timer_pause',
                   'ro_access',
-                  'num_days_weight_reminder')
+                  'num_days_weight_reminder',
+                  'sync_weight',
+                  'sync_exercises',
+                  'sync_nutrition')
+
+# class FitbitForm(forms.ModelForm):
+#   """docstring for  Fitbitform"""
+#   class Meta:
+#         model = Fitbit
+#         fields = ('sync_weight',
+#                   'sync_exercises',
+#                   'sync_nutrition')
 
 
 class UserEmailForm(forms.ModelForm):

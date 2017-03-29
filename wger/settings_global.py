@@ -86,6 +86,9 @@ INSTALLED_APPS = (
 
     # django-bower for installing bower packages
     'djangobower',
+
+    #django-fitbit
+    'fitapp',
 )
 
 # added list of external libraries to be installed by bower
@@ -370,3 +373,6 @@ WGER_SETTINGS = {
     'EMAIL_FROM': 'wger Workout Manager <wger@example.com>',
     'TWITTER': False
 }
+
+FITAPP_CONSUMER_KEY = os.environ['FITAPP_CONSUMER_KEY']
+FITAPP_CONSUMER_SECRET = os.environ['FITAPP_CONSUMER_SECRET']
