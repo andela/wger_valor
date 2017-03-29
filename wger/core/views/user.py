@@ -16,7 +16,7 @@
 
 import logging
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.template.context_processors import csrf
 from django.core.urlresolvers import reverse
@@ -26,6 +26,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMix
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as django_login
 from django.contrib.auth import logout as django_logout
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User as Django_User, User
 from django.contrib.auth.views import login as django_loginview
@@ -38,6 +39,8 @@ from django.views.generic import (
 )
 from django.conf import settings
 from rest_framework.authtoken.models import Token
+
+from social_django.models import UserSocialAuth
 
 from wger.utils.constants import USER_TAB
 from wger.utils.generic_views import WgerFormMixin, WgerMultiplePermissionRequiredMixin
@@ -305,6 +308,40 @@ def preferences(request):
         return HttpResponseRedirect(reverse('core:user:preferences'))
     else:
         return render(request, 'user/preferences.html', template_data)
+
+
+@login_required
+def manage_connected(request):
+    '''
+    Manages connecting or disconnecting to social accounts
+    '''
+    user = request.user
+
+    try:
+        google_login = user.social_auth.get(provider='google')
+    except UserSocialAuth.DoesNotExist:
+        google_login = None
+
+    try:
+        twitter_login = user.social_auth.get(provider='twitter')
+    except UserSocialAuth.DoesNotExist:
+        twitter_login = None
+
+    try:
+        facebook_login = user.social_auth.get(provider='facebook')
+    except UserSocialAuth.DoesNotExist:
+        facebook_login = None
+
+    can_disconnect = (user.social_auth.count() > 1 or user.has_usable_password())
+    # can_disconnect = (user.social_auth.count() > 1)
+
+    return render(request, 'user/manage_connected.html', {
+        'google_login': google_login,
+        'twitter_login': twitter_login,
+        'facebook_login': facebook_login,
+        'can_disconnect': can_disconnect
+    })
+
 
 
 class UserDeactivateView(LoginRequiredMixin,

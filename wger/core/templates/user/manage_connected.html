@@ -1,0 +1,139 @@
+{% extends "base.html" %} {% load i18n staticfiles wger_extras %} {% block title %}{% trans "Manage Connected Accounts" %}{% endblock %} {% block header %}
+<script>
+    $(function() {
+        //$("#preferences-accordion").accordion({
+        //    heightStyle: "content"
+        //});
+    });
+</script>
+<link rel="stylesheet" type="text/css" href="../../static/css/bootstrap-social.css"> {% endblock %} {% block content %}
+<div class="panel-group" id="preferences-accordion">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#preferences-accordion" href="#collapseFacebook">
+                {% trans "Facebook" %}
+                </a>
+            </h4>
+        </div>
+        <div id="collapseFacebook" class="panel-collapse collapse in">
+            <div class="panel-body">
+                {% if facebook_login %}
+                <p>Connected as
+                    <a href="https://facebook.com/{{ facebook_login.extra_data.id }}/" target="_blank" class="btn btn-social btn-facebook" style="text-align: center">
+                        <span class="fa fa-facebook"></span>{{ facebook_login.extra_data.id }}</a>
+                </p>
+                {% if can_disconnect %}
+                <form method="post" action="{% url 'social:disconnect' 'facebook' %}">
+                    {% csrf_token %}
+                    <button type="submit">Disconnect from Facebook</button>
+                </form>
+                {% else %}
+                <button type="button" disabled>Disconnect from Facebook</button>
+                <p>You must define a password for your account before disconnecting from Facebook.</p>
+                {% endif %} {% else %}
+                <p>
+                    <h4>Not connected to any account.</h4>
+                </p>{% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#preferences-accordion" href="#collapseGoogle">
+                {% trans "Google" %}
+                </a>
+            </h4>
+        </div>
+        <div id="collapseGoogle" class="panel-collapse collapse in">
+            <div class="panel-body">
+                {% if google_login %}
+                <p>Connected as
+                    <a href="https://google.com/{{ google_login.extra_data.id }}/" target="_blank" class="btn btn-social btn-google" style="text-align: center">
+                        <span class="fa fa-google"></span>{{ google_login.extra_data }}</a>
+                </p>
+                {% if can_disconnect %}
+                <form method="post" action="{% url 'social:disconnect' 'google' %}">
+                    {% csrf_token %}
+                    <button type="submit">Disconnect from Google</button>
+                </form>
+                {% else %}
+                <button type="button" disabled>Disconnect from Google</button>
+                <p>You must define a password for your account before disconnecting from Google.</p>
+                {% endif %} {% else %}
+                <p>
+                    <h4>Not connected to any account.</h4>
+                </p>{% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#preferences-accordion" href="#collapseTwitter">
+                {% trans "Twitter" %}
+                </a>
+            </h4>
+        </div>
+        <div id="collapseTwitter" class="panel-collapse collapse in">
+            <div class="panel-body">
+                {% if twitter_login %}
+                <p>
+                    <h4>Connected as</h4>
+                    <a href="https://twitter.com/{{ twitter_login.extra_data.access_token.screen_name }}/" target="_blank" class="btn btn-social btn-twitter" style="text-align: center">
+                        <span class="fa fa-twitter"></span>@{{ twitter_login.extra_data.access_token.screen_name }}</a>
+                </p>
+                {% if can_disconnect %}
+                <form method="post" action="{% url 'social:disconnect' 'twitter' %}">
+                    {% csrf_token %}
+                    <button type="submit">Disconnect from Twitter</button>
+                </form>
+                {% else %}
+                <button type="button" disabled>Disconnect from Twitter</button>
+                <p>You must define a password for your account before disconnecting from Twitter.</p>
+                {% endif %} {% else %}
+                <p>
+                    <h4>Not connected to any account.</h4>
+                </p>{% endif %}
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+{% endblock %} {# #} {# Options #} {# #} {% block options %}
+<div class="btn-group">
+    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="{% fa_class 'cog' %}"></span>
+        {% trans "Options" %}
+    </button>
+    <ul class="dropdown-menu">
+        <li>
+            <a href="{% url 'core:user:logout' %}">
+                <span class="{% fa_class 'sign-out' %}"></span> {% trans "Logout" %}
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'core:user:change-password' %}" class="wger-modal-dialog">
+                <span class="{% fa_class 'key' %}"></span> {% trans "Change password" %}
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'core:user:api-key' %}">
+                <span class="{% fa_class 'globe' %}"></span> {% trans "API key" %}
+            </a>
+        </li>
+        <li role="separator" class="divider"></li>
+        <li>
+            <a href="{% url 'core:user:delete' %}" class="wger-modal-dialog">
+                <span class="{% fa_class 'trash' %}"></span> {% trans "Delete account" %}
+            </a>
+        </li>
+    </ul>
+</div>
+{% endblock %}
