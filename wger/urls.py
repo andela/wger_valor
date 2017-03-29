@@ -175,9 +175,6 @@ urlpatterns += [
     # SocialAuth
     url(r'^oauth/', include('social_django.urls',
                             namespace='social')),
-
-    # Manage Connected Accounts
-    url(r'^manage_connected/', user.manage_connected, name='manage_connected'),
 ]
 
 #

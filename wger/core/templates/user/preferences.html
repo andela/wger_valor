@@ -113,19 +113,4 @@
         </li>
     </ul>
 </div>
-
-<div class="btn-group">
-
-    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span class="{% fa_class 'user-circle-o' %}"></span>
-        {% trans "Social Accounts" %}
-    </button>
-    <ul class="dropdown-menu">
-        <li>
-            <a href="{% url 'manage_connected' %}">
-                <span class="{% fa_class 'key' %}"></span> {% trans "Manage Connected" %}
-            </a>
-        </li>
-
-</div>
 {% endblock %}
