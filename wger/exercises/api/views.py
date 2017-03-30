@@ -29,6 +29,7 @@ from wger.config.models import LanguageConfig
 from wger.exercises.api.serializers import (
     MuscleSerializer,
     ExerciseSerializer,
+    ExerciseInfoSerializer,
     ExerciseImageSerializer,
     ExerciseCategorySerializer,
     EquipmentSerializer,
@@ -76,7 +77,25 @@ class ExerciseViewSet(viewsets.ModelViewSet):
         obj.set_author(self.request)
         obj.save()
 
-
+class ExerciseInfoViewSet(viewsets.ModelViewSet):
+    '''
+    API endpoint for exercise objects
+    '''
+    queryset = Exercise.objects.all()
+    serializer_class = ExerciseInfoSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly, CreateOnlyPermission)
+    ordering_fields = '__all__'
+    filter_fields = ('category',
+                     'creation_date',
+                     'description',
+                     'language',
+                     'muscles',
+                     'muscles_secondary',
+                     'status',
+                     'name',
+                     'equipment',
+                     'license',
+                     'license_author')
 @api_view(['GET'])
 def search(request):
     '''

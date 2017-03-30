@@ -32,6 +32,13 @@ class ExerciseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Exercise
 
+class ExerciseInfoSerializer(serializers.ModelSerializer):
+    '''
+    Exercise serializer
+    '''
+    class Meta:
+        model = Exercise
+        depth = 1
 
 class EquipmentSerializer(serializers.ModelSerializer):
     '''
