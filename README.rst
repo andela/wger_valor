@@ -63,14 +63,14 @@ Then install the python packages from pypi in the virtualenv::
 
 ::
 
- $ git clone https://github.com/wger-project/wger.git
- $ cd wger
+ $ git clone https://github.com/andela/wger_valor.git
+ $ cd wger_valor
  $ pip install -r requirements.txt  # or requirements_devel.txt to develop
  $ invoke create_settings \
-          --settings-path /home/wger/wger/settings.py \
-          --database-path /home/wger/wger/database.sqlite
+          --settings-path /home/wger_valor/wger/settings.py \
+          --database-path /home/wger_valor/wger/database.sqlite
  $ invoke bootstrap_wger \
-          --settings-path /home/wger/wger/settings.py \
+          --settings-path /home/wger_valor/wger/settings.py \
           --no-start-server
  $ python manage.py runserver
 
@@ -164,7 +164,7 @@ file a bug anyway.
 * **mailing list:** https://groups.google.com/group/wger / wger@googlegroups.com,
   no registration needed
 * **IRC:** channel #wger on freenode.net, webchat: http://webchat.freenode.net/?channels=wger
-* **issue tracker:** https://github.com/wger-project/wger/issues
+* **issue tracker:** https://github.com/andela/wger_valor/issues
 
 
 Sources
@@ -172,8 +172,7 @@ Sources
 
 All the code and the content is freely available:
 
-* **Main repository:** https://github.com/wger-project/wger
-* **Mirror:** https://bitbucket.org/rolandgeider/wger
+* **Main repository:** https://github.com/andela/wger_valor.git
 
 
 Licence

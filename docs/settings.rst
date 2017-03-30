@@ -10,6 +10,9 @@ dictionary in your settings file. Currently the following options are supported:
   Controls whether users can register on their own or if a gym adminstrator has
   to create the user accounts.
 
+**ALLOW_API_REGISTRATION**: Default ``False``.
+Controls whether users can register via the API
+
 **ALLOW_GUEST_USERS**: Default ``True``.
   Controls whether users can use the site as a guest user or if an administrator
   has to create the user accounts, as with the option above.
@@ -31,4 +34,3 @@ dictionary in your settings file. Currently the following options are supported:
   If you want to override a default setting, don't overwrite all the dictionary
   but only the keys you need, e.g. ``WGER_SETTINGS['foo'] = 'bar'``. This avoids
   problems when new keys are added in the global settings.
-
