@@ -184,6 +184,10 @@ urlpatterns += [
     # Get Authentication token
     url(r'^api/v2/get-token/', rest_views.obtain_auth_token),
     url(r'^api/v2/', include(router.urls)),
+
+    # SocialAuth
+    url(r'^oauth/', include('social_django.urls',
+                            namespace='social')),
 ]
 
 #
