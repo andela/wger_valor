@@ -29,6 +29,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy, ugettext as _
 from django.views.generic import DeleteView, UpdateView
+from django.views.decorators.cache import cache_page
 
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4, cm
@@ -58,7 +59,7 @@ logger = logging.getLogger(__name__)
 # Plan functions
 # ************************
 
-
+@cache_page(60 * 60)
 @login_required
 def overview(request):
     template_data = {}
